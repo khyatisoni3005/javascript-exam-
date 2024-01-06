@@ -7,6 +7,25 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>dog api</title>
 </head>
+<style>
+    body {
+        text-align: center;
+        font-family: Arial, sans-serif;
+    }
+
+    #dogimg {
+        max-width: 80%;
+        height: auto;
+        margin-top: 20px;
+    }
+
+    button {
+        margin-top: 20px;
+        padding: 10px 20px;
+        font-size: 16px;
+        cursor: pointer;
+    }
+</style>
 
 <body>
 
@@ -26,7 +45,7 @@
         function displayimg() {
             let storeurl = localStorage.getItem("dogImage");
             if (storeurl) {
-                document.getElementById("dogimg").src = storedImageUrl;
+                document.getElementById("dogimg").src = storeurl;
             }
         }
         displayimg()
