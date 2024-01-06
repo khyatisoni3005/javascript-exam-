@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>form validation</title>
+
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <!-- css -->
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+
+<style>
+    input {
+        margin-left: 20px;
+        margin-top: 20px;
+
+    }
+
+    button {
+        margin: 20px;
+    }
+</style>
+
+<body>
+
+
+
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <input type="text" class="form-control mb-2" placeholder="name" id="name">
+                <input type="text" class="form-control mb-2" placeholder="number" id="number">
+                <input type="text" class="form-control mb-2" placeholder="email" id="email">
+                <input type="text" class="form-control mb-2" placeholder="age" id="age">
+                <button class="btn btn-primary" onclick="addData()">Enter</button>
+            </div>
+        </div>
+
+        <div class="row justify-content-center mt-4">
+            <div class="col-md-8">
+                <table class="table table-bordered">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th>Name</th>
+                            <th>Number</th>
+                            <th>Email</th>
+                            <th>Age</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tbody"></tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <script>
+        function getData() {
+            return JSON.parse(localStorage.getItem("data")) || []
+        }
+
+        function addData() {
+            let data = getData()
+            let name = document.getElementById("name").value
+            let number = document.getElementById("number").value
+            let email = document.getElementById("email").value
+            let age = document.getElementById("age").value
+
+            if (!name) {
+                alert("enter name")
+                return
+
+            }
+            if (!number) {
+                alert("enter number")
+                return
+
+            } if (!age) {
+                alert("enter age")
+                return
+
+            } if (!email) {
+                alert("enter email")
+                return
+
+            }
+            let newdata = {
+                name,
+                number,
+                email,
+                age,
+                id: new Date().getTime().toString()
+            }
+            data.push(newdata)
+            localStorage.setItem("data", JSON.stringify(data))
+            displaydata()
+            document.getElementById("name").value = ''
+            document.getElementById("number").value = ''
+            document.getElementById("email").value = ''
+            document.getElementById("age").value = ''
+        }
+
+        function displaydata() {
+            let data = getData()
+            let tbody = document.getElementById("tbody")
+            let htmlcontent = ''
+            for (let i = 0; i < data.length; i++) {
+                const inputs = data[i];
+                htmlcontent += `<tr><td>${inputs.name}</td><td>${inputs.number}</td><td>${inputs.email}</td><td>${inputs.age}</td></tr>`
+            }
+            tbody.innerHTML = htmlcontent
+        }
+
+        displaydata()
+    </script>
+
+    <script src="js/bootstrap.bundle.min.js"></script>
+
+</body>
+
+</html>

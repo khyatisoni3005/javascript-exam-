@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>dog api</title>
+</head>
+
+<body>
+
+    <img src="" id="dogimg" alt="">
+    <button onclick="dogapi()">click</button>
+
+
+    <script>
+
+
+        async function dogapi() {
+            let res = await fetch("https://dog.ceo/api/breeds/image/random")
+            let result = await res.json()
+            document.getElementById("dogimg").src = result.message;
+
+        }
+        function displayimg() {
+            let storeurl = localStorage.getItem("dogImage");
+            if (storeurl) {
+                document.getElementById("dogimg").src = storedImageUrl;
+            }
+        }
+        displayimg()
+        console.log(localStorage);
+
+
+    </script>
+
+
+</body>
+
+</html>
